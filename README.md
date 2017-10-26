@@ -12,7 +12,7 @@
 ```
 
 ### Start the network
-./byfn.sh -m up
+``` ./byfn.sh -m up ```
 
 ### Create and join the channel
 docker exec -it cli bash
