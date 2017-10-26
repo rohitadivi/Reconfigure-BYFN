@@ -1,12 +1,15 @@
 ### Using the BYFN for the task of Adding a new org dynamically to an existing network
 
 ### Generate Network Artifacts for all the orgs
+``` 
 ./byfn.sh -m generate
-
-../bin/cryptogen generate --config=./crypto-config1.yaml
+../bin/cryptogen generate --config=./crypto-config1.yaml 
+```
 
 ### Print org3 using configtxgen
+``` 
 ../bin/configtxgen -printOrg Org3MSP > ./scripts/org3.json
+```
 
 ### Start the network
 ./byfn.sh -m up
