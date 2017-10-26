@@ -110,7 +110,7 @@ peer channel update -f config_update_in_envelope.pb -c $CHANNEL_NAME -o orderer.
 docker-compose -f docker-compose-org3.yaml up
 ```
 
-### Switch to Org3
+### Switch to peer0 of Org3
 ```
 export CORE_PEER_LOCALMSPID="Org3MSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
