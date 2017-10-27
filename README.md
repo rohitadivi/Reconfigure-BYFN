@@ -1,4 +1,4 @@
-### Using the BYFN which consists of 2 orgs and 4 peers for the task of adding a new org dynamically to an existing network
+### Using the BYFN which consists of two orgs and four peers for the task of adding a new org dynamically to an existing network
 
 #### Generate Network Artifacts for all the orgs
 ``` 
