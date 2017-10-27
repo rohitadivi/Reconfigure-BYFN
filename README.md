@@ -129,12 +129,12 @@ peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/
 ```
 
 ### The same version of chaincode should be installed on Org1 and Org2
-### switch to org 1 and install cc- refer to line 91-94
+### switch to org 1 and install cc
 ```
 peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 >log.txt
 ```
 
-### Switch to org 2 and install cc- refer to line 99-101
+### Switch to org 2 and install cc
 ```
 peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 >log.txt
 ```
@@ -149,3 +149,4 @@ peer chaincode upgrade -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED 
 peer chaincode invoke -o orderer.example.com:7050  --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}'
 peer chaincode query -C $CHANNEL_NAME -n mycc -c '{"Args":["query","a"]}'
 ```
+### Org3 is now successfully added to the existing network
