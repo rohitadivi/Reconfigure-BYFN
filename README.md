@@ -6,7 +6,7 @@
 ../bin/cryptogen generate --config=./crypto-config1.yaml 
 ```
 
-#### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed throught the cli container
+#### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed through the cli container
 ``` 
 ../bin/configtxgen -printOrg Org3MSP > ./scripts/org3.json
 ```
