@@ -1,4 +1,4 @@
-### Using the BYFN which consists of two orgs and four peers for the task of adding a new org dynamically to an existing network
+### Using the BYFN which consists of two orgs and four peers for the task of adding a new org dynamically to an existing channel
 
 #### Generate Network Artifacts for all the orgs
 ``` 
@@ -6,7 +6,7 @@
 ../bin/cryptogen generate --config=./crypto-config1.yaml 
 ```
 
-#### Print org3 using configtxgen
+#### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed throught the cli container
 ``` 
 ../bin/configtxgen -printOrg Org3MSP > ./scripts/org3.json
 ```
