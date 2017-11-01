@@ -144,7 +144,7 @@ peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/
 peer chaincode upgrade -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 2.0 -c '{"Args":["init","a","90","b","210"]}' -P "OR ('Org1MSP.member','Org2MSP.member','Org3MSP.member')"
 ```
 
-#### An invoke/ query should work to verify if the new org is successfully added to the network
+#### An invoke/ query should work to verify if the new org is successfully added to the channel
 ```
 peer chaincode invoke -o orderer.example.com:7050  --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -c '{"Args":["invoke","a","b","10"]}'
 peer chaincode query -C $CHANNEL_NAME -n mycc -c '{"Args":["query","a"]}'
