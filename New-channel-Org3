@@ -62,7 +62,7 @@ FABRIC_CFG_PATH=$PWD
 
 ### Generate channel configuration transaction
 
-../../bin/configtxgen -profile NewOrgChannel -outputCreateChannelTx ./channel-artifacts/channel1.tx -channelID mychannel1
+../../bin/configtxgen -profile NewOrgChannel -outputCreateChannelTx ../channel-artifacts/channel1.tx -channelID mychannel1
 
 ### Switch to Org3cli terminal and create a new channel with Org3
 
