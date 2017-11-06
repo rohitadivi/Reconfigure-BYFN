@@ -68,18 +68,30 @@ FABRIC_CFG_PATH=$PWD
 
 peer channel create -o orderer.example.com:7050 -c mychannel1 -f ./channel-artifacts/channel1.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA
 
-### Switch to Org1 in cli and fetch the lstest config block
+### Join peer0 of Org3 to the new channel
 
-peer channel fetch config mychannel1.pb -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
-
-peer channel join -b mychannel1.pb
+peer channel join -b mychannel1.block
 
 ### Install chaincode on Org1
 
-peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go/
+peer chaincode install -n newcc -v 1.0 -p github.com/chaincode/chaincode_example02/go/
 
 ### Instantiate the chaincode
 
 peer chaincode instantiate -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C mychannel1 -n newcc -v 1.0 -c '{"Args":["init","a","100","b","200"]}' -P "OR	('Org1MSP.member','Org3MSP.member')"
 
+### Switch to Org1 in cli and fetch the latest config block
+
+peer channel fetch config mychannel1.pb -o orderer.example.com:7050 -c mychannel1 --tls --cafile $ORDERER_CA
+
+peer channel join -b mychannel1.pb
+
+### Install chaincode on Org1
+
+peer chaincode install -n newcc -v 1.0 -p github.com/chaincode/chaincode_example02/go/
+
 ### Make an invoke and query from peer of org3
+
+peer chaincode invoke -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C mychannel1 -n newcc -c '{"Args":["invoke","a","b","10"]}'
+
+peer chaincode query -C mychannel1 -n newcc -c '{"Args":["query","a"]}
