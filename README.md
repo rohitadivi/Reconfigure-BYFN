@@ -125,18 +125,18 @@ peer channel join -b mychannel.block
 
 #### Install chaincode on peer0 of Org3
 ```
-peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 >log.txt
+peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
 ```
 
 #### The same version of chaincode should be installed on Org1 and Org2
 #### switch to org 1 and install cc
 ```
-peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 >log.txt
+peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
 ```
 
 #### Switch to org 2 and install cc
 ```
-peer chaincode install -n mycc -v 2.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02 >log.txt
+peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
 ```
 
 #### Chaincode upgrade should be done using the same version as install
