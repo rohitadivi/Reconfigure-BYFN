@@ -1,3 +1,5 @@
+### The below steps need to be run from cli container since Org1 is in that container
+
 ### Switch to Orderer
 
 CORE_PEER_LOCALMSPID="OrdererMSP"
@@ -60,19 +62,21 @@ FABRIC_CFG_PATH=$PWD
 
 ### Generate channel configuration transaction
 
-../bin/configtxgen -profile NewOrgChannel -outputCreateChannelTx ./channel-artifacts/channel1.tx -channelID mychannel1
+../../bin/configtxgen -profile NewOrgChannel -outputCreateChannelTx ./channel-artifacts/channel1.tx -channelID mychannel1
 
-### Switch to cli terminal and create a new channel with Org3
+### Switch to Org3cli terminal and create a new channel with Org3
 
 peer channel create -o orderer.example.com:7050 -c mychannel1 -f ./channel-artifacts/channel1.tx --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA
 
-### Switch to Org1 and Join the channel
+### Switch to Org1 in cli and fetch the lstest config block
 
-peer channel join -b mychannel1.block
+peer channel fetch config mychannel1.pb -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
+
+peer channel join -b mychannel1.pb
 
 ### Install chaincode on Org1
 
-peer chaincode install -n newcc -v 1.0 -p github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02
+peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go/
 
 ### Instantiate the chaincode
 
