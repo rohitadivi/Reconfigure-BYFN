@@ -94,4 +94,4 @@ peer chaincode install -n newcc -v 1.0 -p github.com/chaincode/chaincode_example
 
 peer chaincode invoke -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C mychannel1 -n newcc -c '{"Args":["invoke","a","b","10"]}'
 
-peer chaincode query -C mychannel1 -n newcc -c '{"Args":["query","a"]}
+peer chaincode query -C mychannel1 -n newcc -c '{"Args":["query","a"]}'
