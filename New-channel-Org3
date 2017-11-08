@@ -72,7 +72,7 @@ peer channel create -o orderer.example.com:7050 -c mychannel1 -f ./channel-artif
 
 peer channel join -b mychannel1.block
 
-### Install chaincode on Org1
+### Install chaincode on peer of Org3
 
 peer chaincode install -n newcc -v 1.0 -p github.com/chaincode/chaincode_example02/go/
 
