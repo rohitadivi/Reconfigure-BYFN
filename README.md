@@ -102,7 +102,7 @@ export CORE_PEER_ADDRESS=peer0.org2.example.com:7051
 
 #### Sending config update to orderer
 ```
-peer channel update -f config_update_in_envelope.pb -c $CHANNEL_NAME -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+peer channel update -f config_update_in_envelope.pb -c $CHANNEL_NAME -o orderer.example.com:7050 --tls true --cafile $ORDERER_CA
 ```
 
 #### Spin up the docker compose file for Org3 in a separate window
