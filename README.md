@@ -10,14 +10,14 @@
 ./byfn.sh -m up 
 ```
 
-#### change to org3-artifacts directory and Generate crypto material for Org 3
+#### Change to org3-artifacts directory and Generate crypto material for Org 3
 ```
 ../../bin/cryptogen generate --config=./org3-crypto.yaml
 ```
 
 #### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed through the cli container
 ``` 
-../bin/configtxgen -printOrg Org3MSP > ./scripts/org3.json
+../../bin/configtxgen -printOrg Org3MSP > ../scripts/org3.json
 ```
 
 #### Run from first-network dir - Copy crypto-config dir to the current working directory to get the orderer ca certs which are needed for making an invoke
