@@ -1,4 +1,6 @@
-### The below steps need to be run from cli container since Org1 is in that container
+### To add the Org3 to the consortium and give it the authority to create a new channel it must be added to the system channel
+
+### Once Org3 is added to the chanel the below steps need to be run from cli container since Orderer is in that container
 
 ### Switch to Orderer
 
@@ -47,7 +49,7 @@ curl -X POST --data-binary @sys_config_update_in_envelope.json "$CONFIGTXLATOR_U
 
 ### Switch to admin user of orderer
 
-export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/users/Admin@example.com/msp
+CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/users/Admin@example.com/msp
 
 ### Sending config update to orderer
 peer channel update -f sys_config_update_in_envelope.pb -c testchainid -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
