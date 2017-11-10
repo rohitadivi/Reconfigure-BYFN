@@ -1,14 +1,8 @@
 ### Using the BYFN which consists of two orgs and four peers for the task of adding a new org dynamically to an existing channel
 
-#### Generate Network Artifacts for all the orgs
+#### Generate Network Artifacts
 ``` 
 ./byfn.sh -m generate
-../bin/cryptogen generate --config=./crypto-config1.yaml 
-```
-
-#### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed through the cli container
-``` 
-../bin/configtxgen -printOrg Org3MSP > ./scripts/org3.json
 ```
 
 #### Start the network
@@ -16,16 +10,31 @@
 ./byfn.sh -m up 
 ```
 
-#### Create and join the channel
+#### change to org3-artifacts directory and Generate crypto material for Org 3
+```
+../../bin/cryptogen generate --config=./org3-crypto.yaml
+```
+
+#### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed through the cli container
+``` 
+../bin/configtxgen -printOrg Org3MSP > ./scripts/org3.json
+```
+
+#### Run from first-network dir - Copy crypto-config dir to the current working directory to get the orderer ca certs which are needed for making an invoke
+```
+cp -r crypto-config/ordererOrganizations org3-artifacts/crypto-config/
+```
+
+#### Spin up the cli container
 ```
 docker exec -it cli bash
 ```
 
-#### Start configtxlator and set below variables
+#### Start configtxlator and set below variables in the cli container
 ```
 configtxlator start &
 CONFIGTXLATOR_URL=http://127.0.0.1:7059
-export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 CHANNEL_NAME=mychannel
 ```
 
@@ -105,9 +114,14 @@ export CORE_PEER_ADDRESS=peer0.org2.example.com:7051
 peer channel update -f config_update_in_envelope.pb -c $CHANNEL_NAME -o orderer.example.com:7050 --tls true --cafile $ORDERER_CA
 ```
 
-#### Spin up the docker compose file for Org3 in a separate window
+#### Spin up the docker compose file for Org3 in a separate terminal
 ```
 docker-compose -f docker-compose-org3.yaml up
+```
+
+### Spin up the cli container for Org3 (Org3cli)
+```
+docker exec -it Org3cli bash
 ```
 
 #### Switch to peer0 of Org3
@@ -116,6 +130,11 @@ export CORE_PEER_LOCALMSPID="Org3MSP"
 export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
 export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
 export CORE_PEER_ADDRESS=peer0.org3.example.com:7051
+```
+
+### Fetch the genesis block to join the peers of Org3 to the existing channel
+```
+peer channel fetch 0 mychannel.block -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
 ```
 
 #### Join peer0 of Org3
@@ -127,6 +146,8 @@ peer channel join -b mychannel.block
 ```
 peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
 ```
+
+#### Switch to Peer1 of Org3, join it to the channel and install same version of chaincode on it to keep the gossip logs normal
 
 #### The same version of chaincode should be installed on Org1 and Org2
 #### switch to org 1 and install cc
