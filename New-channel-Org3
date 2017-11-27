@@ -1,6 +1,6 @@
 ### To add the Org3 to the consortium and give it the authority to create a new channel it must be added to the system channel
 
-### Once Org3 is added to the chanel the below steps need to be run from cli container since Orderer is in that container
+### Once Org3 is added to the channel the below steps need to be run from cli container since Orderer is in that container
 
 ### Switch to Orderer
 
