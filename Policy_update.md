@@ -1,11 +1,6 @@
 ### Implicit meta policy vs Explicit policy
 
 
-#### Generate the network artifacts
-#### Start the network
-#### Change to org3-artifacts directory and Generate crypto material for Org 3
-#### Print org3 using configtxgen and save the output file as org3.json in scripts directory so that it can be accessed through the cli container
-#### Run from first-network dir - Copy crypto-config dir to the current working directory to get the orderer ca certs which are needed for making an invoke
 #### Spin up the cli container
 ``` docker exec -it cli bash ```
 #### Start configtxlator and set below variables in the cli container
@@ -33,3 +28,7 @@ CHANNEL_NAME=mychannel
 
 #### Add the explicit policy from the template 
 ``` jq -s '.[0] * {"channel_group":{"groups":{"Application":{"policies":.[1]}}}}' policy_del.json ./scripts/templates/policy_template.json >& updated_config.json ```
+
+#### continue with the usual process of converting to proto and calculating the difference to obtain delta. Wrap delta in envelope to sign it with Org1 and send update to orderer with Org2
+
+#### Once the update is sent to orderer the Org3 is now added to the channel and the application channel policy is also modified.
