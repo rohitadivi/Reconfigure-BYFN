@@ -2,9 +2,9 @@
 
 ##### The default policy on the application channel is implictly defined which can be 'MAJORITY' 'ANY' or 'ALL'
 
-##### To update the application channel policies from imlicit to explicit we need to follow the below steps
+##### To update the application channel policies from implicit to explicit we need to follow the below steps
 
-##### The policy is updated and defined explicity after adding a new org (ORG3MSP) to the exisiting channel and this can be done by editing the ``` updated_config.json ```
+##### The policy is updated and defined explicitly after adding a new org (ORG3MSP) to the existing channel and this can be done by editing the ``` updated_config.json ```
 
 ##### To edit the policies scroll down to the section in json file where the application channel policies are defined and change the mod policy for 'Admins' 'Readers' and 'Writers'
 
@@ -14,7 +14,7 @@
 
 ##### The type should be changed from '3' to '1' in both Readers and Writers as well to indicate that we are defining the policy explicitly
 
-##### Org3MSP should only be added to Readers and Writers and not to Admins. This is allow the peers in Org3 to read and write to the channel but they cannot sign or make any changes to the channel
+##### Org3MSP should only be added to Readers and Writers and not to Admins. This will allow the peers of Org3 to read and write to the channel but they cannot sign or make any changes to the channel
 
 ##### The last line with "type:0" in the updated_config.json should be removed and make sure to check that the json is valid by checking in json lint
 
