@@ -43,6 +43,6 @@ jq 'del(.channel_group.groups.Application.policies)' updated_config.json  > poli
 jq -s '.[0] * {"channel_group":{"groups":{"Application":{"policies":.[1]}}}}' policy_del.json ./scripts/templates/policy_template.json >& updated_config.json
 ```
 
-#### continue with the usual process of converting to proto and calculating the difference to obtain delta. Wrap delta in envelope to sign it with Org1 and send update to orderer with Org2
+#### continue with the usual process of converting to proto and calculating the difference to obtain delta. Wrap delta in envelope and convert it to proto to sign it with Org1 and send update to orderer with Org2
 
 #### Once the update is sent to orderer the Org3 is now added to the channel and the application channel policy is also modified.
