@@ -1,6 +1,6 @@
 ### This document is for my understanding of implicit meta policy and the explicit policy on application channel
 
-##### The default policy on the application channel is implictly defined which can be 'MAJORITY' 'ANY' or 'ALL'
+##### The default policy on the application channel is implictly defined which can be 'MAJORITY', 'ANY', or 'ALL'
 
 ##### To update the application channel policies from implicit to explicit we need to follow the below steps
 
