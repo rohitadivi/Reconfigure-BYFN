@@ -85,7 +85,7 @@ curl -X POST --data-binary @config_update.pb "$CONFIGTXLATOR_URL/protolator/deco
 
 #### Generating config update and wrapping it in an envelope
 ```
-echo '{"payload":{"header":{"channel_header":{"channel_id":"$CHANNEL_NAME", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' | jq . > config_update_in_envelope.json
+echo '{"payload":{"header":{"channel_header":{"channel_id":"'$CHANNEL_NAME'", "type":2}},"data":{"config_update":'$(cat config_update.json)'}}}' | jq . > config_update_in_envelope.json
 ```
 
 #### Encoding config update envelope
