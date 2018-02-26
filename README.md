@@ -48,39 +48,34 @@ CHANNEL_NAME=mychannel
 peer channel fetch config config_block.pb -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
 ```
 
-#### Decode the block to human readable json format
+#### Decode the block to human readable json format and strip away header and meta data information
 ```
-curl -X POST --data-binary @config_block.pb "$CONFIGTXLATOR_URL/protolator/decode/common.Block" | jq . > config_block.json
-```
-
-#### Isolating current config
-```
-jq .data.data[0].payload.data.config config_block.json > config.json
+configtxlator proto_decode --input config_block.pb --type common.Block | jq .data.data[0].payload.data.config > config.json
 ```
 
 #### Append and add org3.json and then write the output to updated_config.json
 ```
-jq -s '.[0] * {"channel_group":{"groups":{"Application":{"groups": {"Org3MSP":.[1]}}}}}' config.json ./scripts/org3.json >& updated_config.json
+jq -s '.[0] * {"channel_group":{"groups":{"Application":{"groups": {"Org3MSP":.[1]}}}}}' config.json ./channel-artifacts/org3.json > updated_config.json
 ```
 
 #### Translating original config to proto
 ```
-curl -X POST --data-binary @config.json "$CONFIGTXLATOR_URL/protolator/encode/common.Config" > config.pb
+configtxlator proto_encode --input config.json --type common.Config --output config.pb
 ```
 
 #### Translating updated config to proto
 ```
-curl -X POST --data-binary @updated_config.json "$CONFIGTXLATOR_URL/protolator/encode/common.Config" > updated_config.pb
+configtxlator proto_encode --input modified_config.json --type common.Config --output updated_config.pb
 ```
 
 #### Computing config update
 ```
-curl -X POST -F channel=$CHANNEL_NAME -F "original=@config.pb" -F "updated=@updated_config.pb" "${CONFIGTXLATOR_URL}/configtxlator/compute/update-from-configs" > config_update.pb
+configtxlator compute_update --channel_id $CHANNEL_NAME --original config.pb --updated updated_config.pb --output config_update.pb
 ```
 
 #### Decoding config update
 ```
-curl -X POST --data-binary @config_update.pb "$CONFIGTXLATOR_URL/protolator/decode/common.ConfigUpdate" | jq . > config_update.json
+configtxlator proto_decode --input config_update.pb --type common.ConfigUpdate | jq . > config_update.json
 ```
 
 #### Generating config update and wrapping it in an envelope
@@ -90,7 +85,7 @@ echo '{"payload":{"header":{"channel_header":{"channel_id":"'$CHANNEL_NAME'", "t
 
 #### Encoding config update envelope
 ```
-curl -X POST --data-binary @config_update_in_envelope.json "$CONFIGTXLATOR_URL/protolator/encode/common.Envelope" > config_update_in_envelope.pb
+configtxlator proto_encode --input config_update_in_envelope.json --type common.Envelope --output config_update_in_envelope.pb
 ```
 
 #### Sign with org1
