@@ -6,7 +6,15 @@ docker exec -it cli bash
 #### Export the ORDERER_CA variable
 ```
 export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
 ```
+
+#### start configtxlator and export the URL
+```
+configtxlator start &
+CONFIGTXLATOR_URL=http://127.0.0.1:7059
+```
+
 #### Now install the jq tool into the container. This tool allows us script interactions with JSON objects returned by the configtxlator tool
 ```
 apt update && apt install -y jq
