@@ -54,7 +54,7 @@ jq .data.data[0].payload.data.config sys_config_block.json > sys_config.json
 #### Append and add org3.json and then write the output to sys_updated_config.json
 
 ```
-jq -s '.[0] * {"channel_group":{"groups":{"Consortiums":{"groups": {"SampleConsortium": {"groups": {"Org3MSP":.[1]}}}}}}}' sys_config.json ./scripts/org3.json >& sys_updated_config.json
+jq -s '.[0] * {"channel_group":{"groups":{"Consortiums":{"groups": {"SampleConsortium": {"groups": {"Org3MSP":.[1]}}}}}}}' sys_config.json ./channel-artifacts/org3.json >& sys_updated_config.json
 ```
 
 #### Translating original config to proto
@@ -94,12 +94,6 @@ curl -X POST --data-binary @sys_config_update_in_envelope.json "$CONFIGTXLATOR_U
 ```
 
 #### The mod policy for system channel requires the Orderer admin to send the config update
-
-#### Switch to admin user of orderer
-
-```
-export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/users/Admin@example.com/msp
-```
 
 #### Sending config update to orderer
 
