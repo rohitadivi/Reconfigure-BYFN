@@ -7,12 +7,12 @@ docker exec -it cli bash
 ```
 export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 ```
-#### Now install the jq tool into the container. This tool allows us script interactions with JSON objects returned by theconfigtxlator tool
+#### Now install the jq tool into the container. This tool allows us script interactions with JSON objects returned by the configtxlator tool
 ```
 apt update && apt install -y jq
 ```
 
-#### The default channel name from system channel is testchainid and to make a channel config update on this channel need to be working as Orderer admin
+#### The default channel name for system channel is testchainid and to make a channel config update on this channel need to be working as Orderer admin
 
 #### Switch to Orderer
 
