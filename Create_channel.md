@@ -9,12 +9,6 @@ export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/orde
 
 ```
 
-#### start configtxlator and export the URL
-```
-configtxlator start &
-CONFIGTXLATOR_URL=http://127.0.0.1:7059
-```
-
 #### Now install the jq tool into the container. This tool allows us script interactions with JSON objects returned by the configtxlator tool
 ```
 apt update && apt install -y jq
@@ -28,6 +22,13 @@ apt update && apt install -y jq
 CORE_PEER_LOCALMSPID="OrdererMSP"
 CORE_PEER_TLS_ROOTCERT_FILE=$ORDERER_CA
 CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/users/Admin@example.com/msp
+```
+
+
+#### start configtxlator and export the URL
+```
+configtxlator start &
+CONFIGTXLATOR_URL=http://127.0.0.1:7059
 ```
 
 #### Fetch the genesis block for system channel
