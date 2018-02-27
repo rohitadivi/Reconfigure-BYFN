@@ -49,7 +49,7 @@ curl -X POST --data-binary @sys_config_block.pb "$CONFIGTXLATOR_URL/protolator/d
 jq .data.data[0].payload.data.config sys_config_block.json > sys_config.json
 ```
 
-#### To understand the pre-requisites and detailed instructions on how to add Org3 refer to the adding an org to a channel sample in hyperledger docs 
+#### To understand the pre-requisites and detailed instructions on how to add Org3 refer to the [adding an org to a channel](http://hyperledger-fabric.readthedocs.io/en/latest/channel_update.html) sample in hyperledger docs 
 
 #### Append and add org3.json and then write the output to sys_updated_config.json
 
