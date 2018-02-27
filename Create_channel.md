@@ -1,3 +1,5 @@
+#### Here are the instructions to make a config update to a system channel
+
 #### The below instructions are carried out from the cli container
 ```
 docker exec -it cli bash
