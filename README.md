@@ -65,7 +65,7 @@ configtxlator proto_encode --input config.json --type common.Config --output con
 
 #### Translating updated config to proto
 ```
-configtxlator proto_encode --input modified_config.json --type common.Config --output updated_config.pb
+configtxlator proto_encode --input updated_config.json --type common.Config --output updated_config.pb
 ```
 
 #### Computing config update
