@@ -1,4 +1,4 @@
-### Using the BYFN which consists of two orgs and four peers for the task of adding a new org dynamically to an existing channel
+### The steps mentioned below serve as an extention to the BYFN tutorial mentioned in hyperledger fabric and demonstrate how to add a new organisation to an existing channel.
 
 #### Generate Network Artifacts
 ``` 
