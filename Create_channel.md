@@ -95,6 +95,12 @@ echo '{"payload":{"header":{"channel_header":{"channel_id":"testchainid", "type"
 curl -X POST --data-binary @sys_config_update_in_envelope.json "$CONFIGTXLATOR_URL/protolator/encode/common.Envelope" > sys_config_update_in_envelope.pb
 ```
 
+#### Sign with Orderer admin (need switch to Orderer admin env)
+
+```
+peer channel signconfigtx sys_config_update_in_envelope.pb
+```
+
 #### The mod policy for system channel requires the Orderer admin to send the config update
 
 #### Sending config update to orderer
